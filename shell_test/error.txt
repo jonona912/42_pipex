@@ -1,0 +1,4 @@
+ls: cannot access 'GEEK': No such file or directory
+ls: cannot access 'GFG': No such file or directory
+asdfasdf
+asdeedf
