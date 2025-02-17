@@ -8,5 +8,11 @@
 you take cmd1 and divide arguments based on space (first check if that is how this execve works) (DONE)
 
 // ./pipex infile "grep a1" "wc -w" outfile should behave like: < infile grep a1 | wc -w > outfile 
-// // first ./pipex infile "grep a1"
+// // first ./pipex infile "grep a1" (DONE)
+// // ./pipex infile "grep a1" "wc -w" (DONE)
+// // ./pipex infile "grep a1" "wc -w" outfile (DONE)
+
+// now streamline the code with variables
+	// pseudocode
+	// function where infile and first arguments will be handled
 
