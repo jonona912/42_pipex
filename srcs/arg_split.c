@@ -6,7 +6,7 @@
 /*   By: zkhojazo <zkhojazo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:16:58 by zkhojazo          #+#    #+#             */
-/*   Updated: 2025/02/20 14:52:35 by zkhojazo         ###   ########.fr       */
+/*   Updated: 2025/02/20 17:58:59 by zkhojazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,15 +132,37 @@ int	ppx_arg_split(char **argv, t_args *p_args, char c)
 	int		cmd_len;
 	int		i;
 
-	cmd_len = ppx_arg_len(argv);
-	cmd_len -= 2; // -2 because of infile and outfile
+	if (!ft_strcmp(*argv, "here_doc"))
+	{
+		p_args->here_doc = ft_strdup(*argv);
+		argv++;
+		if (!p_args->here_doc)
+			exit (10);
+		p_args->infile = NULL;
+
+		p_args->limiter = ft_strjoin(*argv, "\n"); //ft_strdup(*(++argv));
+		if (!p_args->limiter)
+			exit (11);
+		argv++;
+	}
+	else
+	{
+		p_args->here_doc = NULL;
+		p_args->infile = ft_strdup(*argv);
+		if (!p_args->infile)
+			return (0);
+		argv++;
+		p_args->limiter = NULL;
+	}
+	cmd_len = ppx_arg_len(argv) - 1; // -2 because of outfile
+	// cmd_len -= 1; 
 	// printf("arg_len: %d\n", arg_len);
 	p_args->cmds = (char ***)malloc(sizeof(char *) * (cmd_len + 1));
 	if (!p_args->cmds) // exit with printing error
 		return (0);
-	p_args->infile = ft_strdup(*argv);
+	// p_args->infile = ft_strdup(*argv);
 	i = 0;
-	argv++;
+	// argv++;
 	while (i < cmd_len)
 	{
 		*(p_args->cmds + i) = ppx_split(*(argv + i), c, "'\""); // ft_split(*(argv + i), c);

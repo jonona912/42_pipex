@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_exec_1.c                                       :+:      :+:    :+:   */
+/*   temp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zkhojazo <zkhojazo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:09:23 by zkhojazo          #+#    #+#             */
-/*   Updated: 2025/02/20 23:44:43 by zkhojazo         ###   ########.fr       */
+/*   Updated: 2025/02/20 20:18:56 by zkhojazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,6 @@ int	ppx_print_error_cmd(char **cmds)
 		cmds++;
 	}
 	return (1);
-}
-
-int	ppx_command_not_found(char **cmds, char **path)
-{
-	ft_putstr_fd("pipex: command not found: ", 2);
-	ppx_print_error_cmd(cmds);
-	ft_putstr_fd("\n", 2);
-	free(*path);
-	return (0);
 }
 
 int infile_pipe(int pp[2], t_args *p_args)
@@ -65,23 +56,10 @@ int infile_pipe(int pp[2], t_args *p_args)
 		ft_putstr_fd("pipex: command not found: ", 2);
 		ppx_print_error_cmd(*p_args->cmds);
 		ft_putstr_fd("\n", 2);
-		// perror("pipex:"); 
-		// ft_putstr_fd("pipex: ", 2);
-		// ft_putstr_fd(strerror(errno), 2);
-		// ft_putstr_fd(": ", 2);
-		// ft_putstr_fd(**p_args->cmds, 2);
-		// ft_putstr_fd("\n", 2);
-		// ft_printf("pipex: command not found: %s\n", p_args->infile);
 		free(path);
 		exit(EXIT_FAILURE);
 	}
-	// wait(NULL);
-	int status;
-	waitpid(p, &status, WNOHANG);
-	// if (waitpid(p, &status, WNOHANG) == 0) {
-	// 	// Child process has not finished yet
-	// 	printf("No data available yet.\n");
-	// }
+	wait(NULL);
 	close(pp[1]);
 	free(path);
 	return (1);
@@ -114,21 +92,17 @@ int	outfile_pipe(int read, t_args *p_args, char **cmd)
 			fd = open(p_args->outfile, O_CREAT | O_RDWR, 0644);
 		if (fd == -1)
 		{
-			ft_printf("pipex: %s: %s\n", strerror(errno), p_args->outfile);
 			free(path);
-			exit(EXIT_FAILURE);
+			perror("open");
+			exit(1);
 		}
 		dup2(read, 0);
 		close(read);
 		dup2(fd, 1);
 		close(fd);
 		execve(path, cmd, NULL);
-		ppx_command_not_found(*p_args->cmds, &path);
-		// perror("execve");
-		// ft_putstr_fd("pipex: command not found: ", 2);
-		// ppx_print_error_cmd(*p_args->cmds);
-		// ft_putstr_fd("\n", 2);
-		// free(path);
+		perror("execve");
+		free(path);
 		exit(1);
 	}
 	wait(NULL);
@@ -154,12 +128,7 @@ int	execute_cmd(int read, int write, char **cmd, t_args *p_args)
 		perror("Error");
 		exit(1);
 	}
-	// wait(NULL);
-	int status;
-	if (waitpid(p, &status, WNOHANG) == 0) {
-		// Child process has not finished yet
-		printf("No data available yet.\n");
-	}
+	wait(NULL);
 	free(path);
 	close(read);
 	close(write);

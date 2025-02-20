@@ -1,6 +1,27 @@
 ./pipex infile "ls -l" "wc -l" out_test										| Correct
 ./pipex infile "ls -l" "grep execve" "wc -w" out_test						| Correct
 
+// // empty file
+./pipex emptyfile "cat" "wc -l" outfile	| DONE
+cat < emptyfile | wc -l > outfile 
+
+// // nonexistant file DONE
+./pipex nonexistentfile "cat" "wc -l" outfile
+cat < nonexistentfile | wc -l > outfile
+
+// // nonexistant cmd  DONE
+./pipex infile "nonexis tentcmd" "wc -l" outfile 
+"nonexis tentcmd" < infile | wc -l > outfile
+
+// // No permission for output file  DONE
+./pipex infile "cat" "wc -l" /root/outfile
+cat < infile | wc -l > /root/outfile
+
+// //  Large Input File
+./pipex largefile "cat" "wc -l" outfile
+cat < largefile | wc -l > outfile
+
+
 ./pipex infile "ls -l" "grep \.c" "wc -l" "awk '{print $1}'" out_test 		| Problem : awk '{print }' is the cmd
 < infile ls -l | grep '\.c' | wc -l | awk '{print $1}' > out_test
 
@@ -12,3 +33,10 @@
 
 ./pipex infile "ls" "grep '\.c'" "sort" "uniq" "wc -l" out_test
 ls | grep '\.c' | sort | uniq | wc -l > out_test
+
+
+
+
+
+
+ ./pipex here_doc LIMITER "ls -l" "wc -w" out_test

@@ -6,7 +6,7 @@
 /*   By: zkhojazo <zkhojazo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 17:46:00 by zkhojazo          #+#    #+#             */
-/*   Updated: 2025/02/20 15:05:11 by zkhojazo         ###   ########.fr       */
+/*   Updated: 2025/02/20 20:27:22 by zkhojazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,39 @@ void	ppx_print_t_args(t_args p_args)
 		printf("\n");
 		i++;
 	}
-	printf("infile: %s\n", p_args.infile);
-	printf("outfile: %s\n", p_args.outfile);
+	printf("\ninfile: %s\n", p_args.infile);
+	printf("outfil: %s\n", p_args.outfile);
+	printf("hd    : %s\n", p_args.here_doc);
+	printf("limite: %s\n", p_args.limiter);
 }
 
 
 // ./pipex here_doc LIMITER cmd cmd1 file
 // cmd << LIMITER | cmd1 >> file
 
+int	here_doc_handler(t_pipes pipes, t_args *p_args)
+{
+	int i;
+	pid_t p;
+
+	i = 1;
+	p = fork();
+	if (p == 0)
+	{
+		dup2(pipes.pp1[1], 1);
+		close(pipes.pp1[1]);
+		while (i)
+		{
+			char *str = get_next_line(0);
+			if (!ft_strcmp(str, p_args->limiter))
+				break ;
+			ft_putstr_fd(str, 1);
+		}
+		exit (0);
+	}
+	close(pipes.pp1[1]);
+	return (1);
+}
 int	main(int argc, char **argv)
 {
 	t_pipes	pipes;
@@ -45,32 +70,21 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Usage: ./pipex file1 cmd1 cmd2 file2\n", 2);
 		return (1);
 	}
-	i = 0;
-	// int j = 0;
 	pipe(pipes.pp1);
 	ppx_arg_split((argv + 1), &p_args, ' ');
-	// if (!ft_strcmp(p_args.infile, "here_doc"))
-	// {
-	// 	char *limiter = ft_strjoin(**p_args.cmds, "\n"); // problem
-	// 	i = 1;
-	// 	dup2(pipes.pp1[1], 1);
-	// 	close(pipes.pp1[1]);
-	// 	while (i)
-	// 	{
-	// 		char *str = get_next_line(0);
-	// 		if (!ft_strcmp(str, limiter))
-	// 			break ;
-	// 		ft_putstr_fd(str, 1);
-	// 	}
-	// }
-	// else
-		infile_pipe(pipes.pp1, &p_args);// // close pp1[1];
+	if (p_args.here_doc)
+	{
+		argc--;
+		here_doc_handler(pipes, &p_args);
+	}
+	else
+		infile_pipe(pipes.pp1, &p_args); // // close pp1[1];
 	i = 0;
 	pipes.temp_pp[0] = pipes.pp1[0];
 	if (argc > 5)
 		i = execute_cmd_struct(&pipes, &p_args, argc);
 	outfile_pipe(pipes.temp_pp[0], &p_args, *(p_args.cmds + 1 + i)); // closes pp1[0]
-	ft_putstr_fd("end_reached\n", 1);
+	// ft_putstr_fd("end_reached\n", 1);
 	ppx_free_t_args(&p_args);
 	return (0);
 }
