@@ -1,0 +1,14 @@
+./pipex infile "ls -l" "wc -l" out_test										| Correct
+./pipex infile "ls -l" "grep execve" "wc -w" out_test						| Correct
+
+./pipex infile "ls -l" "grep \.c" "wc -l" "awk '{print $1}'" out_test 		| Problem : awk '{print }' is the cmd
+< infile ls -l | grep '\.c' | wc -l | awk '{print $1}' > out_test
+
+./pipex infile "cat infile" "grep 'hello'" "wc -l" out_test					| Works when 'hello' replaced with hello
+< infile cat infile | grep 'hello' | wc -l > out_test
+
+./pipex infile "cat infile" "sed 's/foo/bar/g'" out_test
+< infile cat infile | sed 's/foo/bar/g' > out_test
+
+./pipex infile "ls" "grep '\.c'" "sort" "uniq" "wc -l" out_test
+ls | grep '\.c' | sort | uniq | wc -l > out_test

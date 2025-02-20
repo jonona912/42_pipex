@@ -6,7 +6,7 @@
 #    By: zkhojazo <zkhojazo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 12:09:45 by zkhojazo          #+#    #+#              #
-#    Updated: 2025/02/13 16:37:03 by zkhojazo         ###   ########.fr        #
+#    Updated: 2025/02/18 23:41:59 by zkhojazo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS = ft_atoi.c ft_bzero.c ft_calloc.c \
 		ft_lstadd_front_bonus.c ft_lstclear_bonus.c \
 		ft_lstdelone_bonus.c ft_lstiter_bonus.c ft_lstlast_bonus.c \
 		ft_lstmap_bonus.c ft_lstnew_bonus.c ft_lstsize_bonus.c \
-		ft_strcmp.c ft_strstr.c ft_strstr_last.c
+		ft_strcmp.c ft_strstr.c ft_strstr_last.c ft_free_double_ptr.c
 OBJS = $(SRCS:.c=.o)
 
 CFLAGS = -Wall -Wextra -Werror -fPIC

@@ -6,7 +6,7 @@
 /*   By: zkhojazo <zkhojazo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 19:50:36 by zkhojazo          #+#    #+#             */
-/*   Updated: 2025/02/13 16:40:27 by zkhojazo         ###   ########.fr       */
+/*   Updated: 2025/02/18 23:41:36 by zkhojazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+
+int	ft_free_double_ptr(char **str);
 // ft_is functions
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
@@ -53,7 +55,7 @@ int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 // char	*ft_strncpy(char *dest, const char *src, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
-char	*ft_trstr(const char *big, const char *little);
+char	*ft_strstr(const char *big, const char *little);
 char	*ft_strstr_last(const char *big, const char *little);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strtrim(char const *s1, char const *set);

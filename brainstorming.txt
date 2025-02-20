@@ -26,3 +26,12 @@ you take cmd1 and divide arguments based on space (first check if that is how th
 	// pp2[2] -- pipe(pp2) --> read from pp1[0] and write to pp2[1]
 	// pp3[2] -- pipe(pp3) --> read from pp2[0] and wrtie to pp3[1]
 	// pp4[2] -- pipe(pp3) --> read from pp3[0] and write to pp4[1]
+
+	// pipe(pp2) if i is odd
+	// pipe(pp1) if i is even
+	// pp[0] = pp1[0];
+	// pp[1] = pp2[1]
+	// int pp[2];
+	// pp2[2] -- pipe(pp2) --> read from pp1[0] and write to pp2[1] // not pp1 is free
+	// pp3[2] -- pipe(pp1) --> read from pp2[0] and wrtie to pp1[1] // pp1[1] not freed
+	// pp4[2] -- pipe(pp2) --> read from pp1[0] and write to pp2[1]
