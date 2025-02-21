@@ -14,7 +14,9 @@ LIBFT = libft.a
 
 LIBS = -L $(LIBFT_DIR) -lft -L $(GNL_DIR) -lgnl -L $(FT_PRINTF_DIR) -lftprintf
 
-SRCS = arg_split.c \
+SRCS = arg_split_helper_1.c \
+		arg_split_helper_2.c \
+		arg_split.c \
 		cmd_exec_1.c \
 		main_pipex.c \
 		ppx_free_mem.c

@@ -1,5 +1,5 @@
-./pipex infile "ls -l" "wc -l" out_test										| Correct
-./pipex infile "ls -l" "grep execve" "wc -w" out_test						| Correct
+./pipex infile "ls -l" "wc -l" outfile										| Correct
+./pipex infile "ls -l" "grep execve" "wc -w" outfile						| Correct
 
 // // empty file
 ./pipex emptyfile "cat" "wc -l" outfile	| DONE
@@ -17,6 +17,7 @@ cat < nonexistentfile | wc -l > outfile
 ./pipex infile "cat" "wc -l" /root/outfile
 cat < infile | wc -l > /root/outfile
 
+
 // //  Large Input File
 ./pipex largefile "cat" "wc -l" outfile
 cat < largefile | wc -l > outfile
@@ -27,21 +28,37 @@ cat < largefile | wc -l > outfile
 
 
 | Problem : awk '{print }' is the cmd
-./pipex infile "ls -l" "grep \.c" "wc -l" "awk '{print $1}'" out_test 
-< infile ls -l | grep '\.c' | wc -l | awk '{print $1}' > out_test
+./pipex infile "ls -l" "grep \.c" "wc -l" "awk '{print $1}'" outfile 
+< infile ls -l | grep '\.c' | wc -l | awk '{print $1}' > outfile
 
-./pipex infile "cat infile" "grep 'hello'" "wc -l" out_test					| Works when 'hello' replaced with hello
-< infile cat infile | grep 'hello' | wc -l > out_test
-
-./pipex infile "cat infile" "sed 's/foo/bar/g'" out_test
-< infile cat infile | sed 's/foo/bar/g' > out_test
-
-./pipex infile "ls" "grep '\.c'" "sort" "uniq" "wc -l" out_test
-ls | grep '\.c' | sort | uniq | wc -l > out_test
+| Works when 'hello' replaced with hello
+./pipex infile "cat infile" "grep 'hello'" "wc -l" outfile
+< infile cat infile | grep 'hello' | wc -l > outfile
 
 
+./pipex infile "cat infile" "sed 's/foo/bar/g'" outfile
+< infile cat infile | sed 's/foo/bar/g' > outfile
+
+./pipex infile "ls" "grep '\.c'" "sort" "uniq" "wc -l" outfile
+ls | grep '\.c' | sort | uniq | wc -l > outfile
 
 
 
 
- ./pipex here_doc LIMITER "ls -l" "wc -w" out_test
+
+./pipex infile "" "" outfile
+< infile | > outfile
+
+ No Input File
+./pipex "" "cat" "wc -l" outfile
+cat < | wc -l > outfile
+
+./pipex infile "cat" "wc -l" ""
+cat < infile | wc -l >
+
+WORKS but NOT wiht largefile
+./pipex infile "cat" "grep foo" "wc -l" outfile
+cat < infile | grep foo | wc -l > outfile
+
+./pipex largefile "cat" "grep 40" "wc -l" outfile
+cat < largefile | grep 40 | wc -l > outfile
