@@ -22,7 +22,12 @@ cat < infile | wc -l > /root/outfile
 cat < largefile | wc -l > outfile
 
 
-./pipex infile "ls -l" "grep \.c" "wc -l" "awk '{print $1}'" out_test 		| Problem : awk '{print }' is the cmd
+//	here_doc
+./pipex here_doc LIMITER "cat" "wc -l" outfile
+
+
+| Problem : awk '{print }' is the cmd
+./pipex infile "ls -l" "grep \.c" "wc -l" "awk '{print $1}'" out_test 
 < infile ls -l | grep '\.c' | wc -l | awk '{print $1}' > out_test
 
 ./pipex infile "cat infile" "grep 'hello'" "wc -l" out_test					| Works when 'hello' replaced with hello

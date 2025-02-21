@@ -6,7 +6,7 @@
 /*   By: zkhojazo <zkhojazo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 17:46:00 by zkhojazo          #+#    #+#             */
-/*   Updated: 2025/02/20 20:27:22 by zkhojazo         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:13:27 by zkhojazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ int	main(int argc, char **argv)
 	}
 	pipe(pipes.pp1);
 	ppx_arg_split((argv + 1), &p_args, ' ');
+	// ppx_print_t_args(p_args);
+	// ppx_free_t_args(&)
+
 	if (p_args.here_doc)
 	{
 		argc--;

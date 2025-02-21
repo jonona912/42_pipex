@@ -6,7 +6,7 @@
 /*   By: zkhojazo <zkhojazo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:09:23 by zkhojazo          #+#    #+#             */
-/*   Updated: 2025/02/20 23:44:43 by zkhojazo         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:19:54 by zkhojazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	ppx_print_error_cmd(char **cmds)
 		ft_putstr_fd(" ", 2);
 		cmds++;
 	}
+	ft_putstr_fd("\n", 2);
 	return (1);
 }
 
@@ -27,7 +28,6 @@ int	ppx_command_not_found(char **cmds, char **path)
 {
 	ft_putstr_fd("pipex: command not found: ", 2);
 	ppx_print_error_cmd(cmds);
-	ft_putstr_fd("\n", 2);
 	free(*path);
 	return (0);
 }
@@ -43,20 +43,27 @@ int infile_pipe(int pp[2], t_args *p_args)
 		perror("ft_strjoin");
 		return (-1);
 	}
+	fd = open(p_args->infile, O_RDONLY);
+	if (fd == -1) {
+		ft_printf("pipex: %s: %s\n", strerror(errno), p_args->infile);
+		free(path);
+		exit(EXIT_FAILURE);
+	}
 	p = fork();
 	if (p == -1) {
 		perror("fork");
 		free(path);
 		return (-1);
 	}
+	// ft_putstr_fd("erjaf;ldj\n", 2);
 	if (p == 0) {
 		close(pp[0]);
-		fd = open(p_args->infile, O_RDONLY);
-		if (fd == -1) {
-			ft_printf("pipex: %s: %s\n", strerror(errno), p_args->infile);
-			free(path);
-			exit(EXIT_FAILURE);
-		}
+		// fd = open(p_args->infile, O_RDONLY);
+		// if (fd == -1) {
+		// 	ft_printf("pipex: %s: %s\n", strerror(errno), p_args->infile);
+		// 	free(path);
+		// 	exit(EXIT_FAILURE);
+		// }
 		dup2(fd, 0);
 		close(fd);
 		dup2(pp[1], 1);
@@ -64,7 +71,7 @@ int infile_pipe(int pp[2], t_args *p_args)
 		execve(path, *p_args->cmds, NULL);
 		ft_putstr_fd("pipex: command not found: ", 2);
 		ppx_print_error_cmd(*p_args->cmds);
-		ft_putstr_fd("\n", 2);
+		// ft_putstr_fd("\n", 2);
 		// perror("pipex:"); 
 		// ft_putstr_fd("pipex: ", 2);
 		// ft_putstr_fd(strerror(errno), 2);
@@ -75,9 +82,10 @@ int infile_pipe(int pp[2], t_args *p_args)
 		free(path);
 		exit(EXIT_FAILURE);
 	}
-	// wait(NULL);
+	wait(NULL);
 	int status;
 	waitpid(p, &status, WNOHANG);
+	close(fd);
 	// if (waitpid(p, &status, WNOHANG) == 0) {
 	// 	// Child process has not finished yet
 	// 	printf("No data available yet.\n");
@@ -131,7 +139,9 @@ int	outfile_pipe(int read, t_args *p_args, char **cmd)
 		// free(path);
 		exit(1);
 	}
-	wait(NULL);
+	// wait(NULL);
+	int status;
+	waitpid(p, &status, WNOHANG);
 	free(path);
 	close(read);
 	return (1);
@@ -155,11 +165,12 @@ int	execute_cmd(int read, int write, char **cmd, t_args *p_args)
 		exit(1);
 	}
 	// wait(NULL);
-	int status;
-	if (waitpid(p, &status, WNOHANG) == 0) {
-		// Child process has not finished yet
-		printf("No data available yet.\n");
-	}
+	int	status;
+	waitpid(p, &status, WNOHANG);
+	// if (waitpid(p, &status, WNOHANG) == 0) {
+	// 	// Child process has not finished yet
+	// 	printf("No data available yet.\n");
+	// }
 	free(path);
 	close(read);
 	close(write);

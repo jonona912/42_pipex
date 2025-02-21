@@ -35,3 +35,19 @@ you take cmd1 and divide arguments based on space (first check if that is how th
 	// pp2[2] -- pipe(pp2) --> read from pp1[0] and write to pp2[1] // not pp1 is free
 	// pp3[2] -- pipe(pp1) --> read from pp2[0] and wrtie to pp1[1] // pp1[1] not freed
 	// pp4[2] -- pipe(pp2) --> read from pp1[0] and write to pp2[1]
+
+
+
+
+// pseudocode
+if here_doc -> from pp1[2] -> stdout changed to pp1[1], read function keeps reading and outputting there
+pp1[1] is closed and now pp1[0] in main function contents....
+
+if infile -> pp1[2]: open file (fd) becomes stdin and stdout becomes pp1[1]
+pp1[1] is closed and now from pp1[0] in main function contents can be read
+
+execute cmd - executes all the commands
+
+
+writing to the function (LALALALAL)
+opens fd file and makes it stdout

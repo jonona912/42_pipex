@@ -6,7 +6,7 @@
 /*   By: zkhojazo <zkhojazo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:09:23 by zkhojazo          #+#    #+#             */
-/*   Updated: 2025/02/20 20:18:56 by zkhojazo         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:25:34 by zkhojazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ int infile_pipe(int pp[2], t_args *p_args)
 		free(path);
 		exit(EXIT_FAILURE);
 	}
-	wait(NULL);
+	// wait(NULL);
+	int status;
+	waitpid(p, &status, WNOHANG);
 	close(pp[1]);
 	free(path);
 	return (1);
