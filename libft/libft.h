@@ -6,7 +6,7 @@
 /*   By: zkhojazo <zkhojazo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 19:50:36 by zkhojazo          #+#    #+#             */
-/*   Updated: 2025/02/18 23:41:36 by zkhojazo         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:15:08 by zkhojazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-
-int	ft_free_double_ptr(char **str);
+int		ft_free_double_ptr(char **str);
 // ft_is functions
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);

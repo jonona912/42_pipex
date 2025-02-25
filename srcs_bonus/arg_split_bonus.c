@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arg_split.c                                        :+:      :+:    :+:   */
+/*   arg_split_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zkhojazo <zkhojazo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:16:58 by zkhojazo          #+#    #+#             */
-/*   Updated: 2025/02/22 12:46:58 by zkhojazo         ###   ########.fr       */
+/*   Updated: 2025/02/22 15:29:05 by zkhojazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "../include/pipex_bonus.h"
 
 int	make_in_out_file(char ***argv, t_args *p_args, int i, t_is_str make)
 {

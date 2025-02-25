@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arg_split_helper_2.c                               :+:      :+:    :+:   */
+/*   arg_split_helper_2_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zkhojazo <zkhojazo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 22:08:31 by zkhojazo          #+#    #+#             */
-/*   Updated: 2025/02/22 13:42:25 by zkhojazo         ###   ########.fr       */
+/*   Updated: 2025/02/22 15:29:15 by zkhojazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "../include/pipex_bonus.h"
 
 int	ppx_split_free(char ***str, int len)
 {

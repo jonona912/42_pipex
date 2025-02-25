@@ -6,7 +6,7 @@
 /*   By: zkhojazo <zkhojazo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:49:26 by zkhojazo          #+#    #+#             */
-/*   Updated: 2025/02/05 11:35:32 by zkhojazo         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:15:19 by zkhojazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 
-#include "../libft/libft.h"
+# include "../libft/libft.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 12

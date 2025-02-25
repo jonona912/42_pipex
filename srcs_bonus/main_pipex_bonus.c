@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_pipex.c                                       :+:      :+:    :+:   */
+/*   main_pipex_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zkhojazo <zkhojazo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 17:46:00 by zkhojazo          #+#    #+#             */
-/*   Updated: 2025/02/22 15:06:50 by zkhojazo         ###   ########.fr       */
+/*   Updated: 2025/02/22 15:29:24 by zkhojazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "../include/pipex_bonus.h"
 
 // void	ppx_print_t_args(t_args p_args)
 // {
