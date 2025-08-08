@@ -1,6 +1,8 @@
 # 42_pipex  
 Pipex – Project at 42 school (42 Wolfsburg)
 
+![Bonus Completed](https://img.shields.io/badge/bonus-completed-brightgreen)
+
 <h1 align="center">
 	🔗 Pipex
 </h1>
@@ -22,6 +24,9 @@ Pipex – Project at 42 school (42 Wolfsburg)
 ## 💡 About the project
 
 > _Pipex is an individual project focused on recreating the shell’s pipe functionality in C. The program executes a series of commands, passing outputs through pipes to mimic shell behavior. This project emphasizes process creation, file descriptor management, and inter-process communication using pipes—fundamental concepts for advanced C programming and future studies at 42._
+
+#### 🚀 Bonus
+- [x] More than two commands can be piped
 
 For more details, refer to the [**subject of this project**](https://github.com/jonona912/42_pipex/blob/main/pipex_subject.pdf).
 
